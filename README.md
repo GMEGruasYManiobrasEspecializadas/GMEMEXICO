@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,119 +8,114 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Poppins', sans-serif;
             overflow-x: hidden;
-            background-color: #f4f7f9;
+            background: #f4f7f9;
             color: #1e293b;
         }
         .bg-gme-blue { background-color: #1e293b; }
         .bg-gme-red { background-color: #ef4444; }
         .text-gme-red { color: #ef4444; }
         .text-gme-blue { color: #1e293b; }
+
+        /* Estilo de la tarjeta de servicio con sombra suave y transición */
         .service-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease, border-color 0.4s ease;
             border: 2px solid transparent;
             cursor: pointer;
         }
         .service-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
             border-color: #ef4444;
         }
+
+        /* Estilo de los botones */
         .btn-primary {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.25);
         }
+
+        /* Animación de entrada para secciones */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .animate-fade-in { animation: fadeIn 0.8s ease-out; }
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 14px 28px;
-            background-color: rgba(30, 41, 59, 0.95);
-            color: white;
-            border-radius: 9999px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.4s ease, visibility 0.4s ease;
-            z-index: 1000;
-        }
-        .toast.show {
-            opacity: 1;
-            visibility: visible;
-        }
+        .animate-fade-in { animation: fadeIn 1s ease-out; }
+
+        /* Estilo para los iconos de servicio */
         .service-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
             color: #ef4444;
         }
-        .section-header {
+
+        /* Estilo para los nuevos separadores de secciones */
+        .section-header-divider {
+            height: 6px;
+            width: 100px;
+            background: linear-gradient(90deg, #ef4444, #f87171);
+            border-radius: 9999px;
+            margin: 0 auto;
             position: relative;
-            padding-bottom: 1rem;
+            margin-top: 1rem;
         }
-        .section-header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: #ef4444;
-            border-radius: 2px;
+
+        /* Nuevo estilo para los campos de formulario con efecto de "pincelada" */
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
         }
-        /* New Hero Section Styling */
+        .form-input:focus {
+            outline: none;
+            border-color: #ef4444;
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.25);
+        }
+
+        /* Estilo para la nueva sección principal (hero) */
         .hero-section {
-            background-image: url('Grupo GME (1).jpg');
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
+            background: linear-gradient(135deg, #1e293b, #2c3d52);
             position: relative;
-            height: 500px; /* Adjust height as needed */
+            height: 500px;
             width: 100%;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
             border-radius: 0 0 40px 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4); /* Overlay to make text readable */
-            border-radius: inherit;
-        }
-        .hero-content {
-            position: relative;
-            z-index: 10;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
             color: white;
             padding: 2rem;
-            max-width: 800px;
+        }
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: #f4f7f9;
+            clip-path: ellipse(50% 50% at 50% 100%);
+            z-index: 10;
         }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
 
     <!-- Header -->
-    <header class="bg-gme-blue text-white shadow-xl rounded-b-[40px]">
+    <header class="bg-gme-blue text-white shadow-xl rounded-b-[40px] z-50 relative">
         <div class="container mx-auto px-6 py-8 flex flex-col sm:flex-row justify-between items-center">
             <h1 class="text-5xl font-extrabold mb-4 sm:mb-0 drop-shadow-lg">GME 🏗️</h1>
             <nav class="space-x-4 sm:space-x-8 mt-4 sm:mt-0 text-lg font-medium">
@@ -132,22 +128,28 @@
     </header>
 
     <main class="flex-grow">
-        <!-- Hero Section with uploaded image -->
+        <!-- Hero Section -->
         <section class="hero-section">
-            <div class="hero-content">
-                <!-- Content is part of the image, so we'll leave this section empty or with a simple CTA -->
-                <a href="#quote" class="inline-block bg-gme-red text-white font-bold py-4 px-10 rounded-full shadow-lg hover:bg-red-600 transition-colors duration-300 btn-primary">
-                    ¡Cotiza tu proyecto! 📝
-                </a>
-            </div>
+            <h2 class="text-5xl md:text-6xl font-extrabold mb-4 drop-shadow-md animate-fade-in">
+                Grúas y Maniobras de Excelencia
+            </h2>
+            <p class="text-xl md:text-2xl mb-10 font-medium max-w-2xl animate-fade-in">
+                Soluciones integrales para la industria, con la seguridad y la tecnología que tu proyecto merece.
+            </p>
+            <a href="#quote" class="inline-block bg-gme-red text-white font-bold py-4 px-10 rounded-full shadow-lg hover:bg-red-600 transition-colors duration-300 btn-primary animate-fade-in">
+                ¡Cotiza tu proyecto! 📝
+            </a>
         </section>
 
         <!-- About Us Section -->
-        <section id="about" class="py-24 bg-white rounded-t-[40px] -mt-10 relative z-20 shadow-inner">
+        <section id="about" class="py-24 bg-white rounded-t-[40px] -mt-10 relative z-20 shadow-inner animate-fade-in">
             <div class="container mx-auto px-6">
-                <h3 class="text-4xl font-extrabold text-center mb-16 text-gme-blue section-header">
-                    Sobre Nosotros 🤝
-                </h3>
+                <div class="text-center mb-16">
+                    <h3 class="text-4xl font-extrabold text-gme-blue">
+                        Sobre Nosotros 🤝
+                    </h3>
+                    <div class="section-header-divider"></div>
+                </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
                     <div>
                         <h4 class="text-2xl font-bold text-gme-blue mb-4">Misión 🎯</h4>
@@ -174,12 +176,15 @@
         </section>
 
         <!-- Services Section -->
-        <section id="services" class="py-24 bg-gray-100">
+        <section id="services" class="py-24 bg-gray-100 animate-fade-in">
             <div class="container mx-auto px-6">
-                <h3 class="text-4xl font-extrabold text-center mb-4 text-gme-blue section-header">
-                    Nuestros Servicios 🛠️
-                </h3>
-                <p class="text-center text-xl font-medium text-gray-700 mb-16">Nuestra promesa es la **excelencia en cada maniobra**.</p>
+                <div class="text-center mb-16">
+                    <h3 class="text-4xl font-extrabold text-gme-blue">
+                        Nuestros Servicios 🛠️
+                    </h3>
+                    <p class="text-xl font-medium text-gray-700 mt-4">Nuestra promesa es la **excelencia en cada maniobra**.</p>
+                    <div class="section-header-divider"></div>
+                </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
                     
                     <!-- Servicio 1: Grúas Industriales -->
@@ -224,14 +229,14 @@
                         <p class="text-gray-600">Servicio especializado para el manejo seguro de mercancía y equipos sensibles.</p>
                     </div>
                     
-                    <!-- NUEVO SERVICIO: Herrería -->
+                    <!-- Servicio 7: Herrería -->
                     <div class="bg-white rounded-3xl shadow-lg p-10 service-card text-center" data-service="herreria">
                         <i class="fas fa-gavel service-icon"></i>
                         <h4 class="text-2xl font-bold text-gme-blue mb-2">Herrería</h4>
                         <p class="text-gray-600">Fabricación y montaje de estructuras metálicas, soldadura especializada y trabajos de metal en general.</p>
                     </div>
 
-                    <!-- NUEVO SERVICIO: Pailería -->
+                    <!-- Servicio 8: Pailería -->
                     <div class="bg-white rounded-3xl shadow-lg p-10 service-card text-center" data-service="paileria">
                         <i class="fas fa-cogs service-icon"></i>
                         <h4 class="text-2xl font-bold text-gme-blue mb-2">Pailería</h4>
@@ -243,12 +248,14 @@
         </section>
 
         <!-- Brands Section -->
-        <section id="brands" class="py-24 bg-white">
+        <section id="brands" class="py-24 bg-white animate-fade-in">
             <div class="container mx-auto px-6">
-                <h3 class="text-4xl font-extrabold text-center mb-16 text-gme-blue section-header">
-                    Nuestras Principales Marcas 🔧
-                </h3>
-                
+                <div class="text-center mb-16">
+                    <h3 class="text-4xl font-extrabold text-gme-blue">
+                        Nuestras Principales Marcas 🔧
+                    </h3>
+                    <div class="section-header-divider"></div>
+                </div>
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 text-center items-center justify-center">
                     <div class="bg-gray-100 rounded-xl p-4 shadow-inner text-lg font-semibold text-gray-800">Liebherr</div>
                     <div class="bg-gray-100 rounded-xl p-4 shadow-inner text-lg font-semibold text-gray-800">Grove</div>
@@ -267,28 +274,31 @@
         </section>
 
         <!-- Quote Form Section -->
-        <section id="quote" class="py-24 bg-gray-100">
+        <section id="quote" class="py-24 bg-gray-100 animate-fade-in">
             <div class="container mx-auto px-6">
-                <h3 class="text-4xl font-extrabold text-center mb-16 text-gme-blue section-header">
-                    Cotiza tu Proyecto 📝
-                </h3>
+                <div class="text-center mb-16">
+                    <h3 class="text-4xl font-extrabold text-gme-blue">
+                        Cotiza tu Proyecto 📝
+                    </h3>
+                    <div class="section-header-divider"></div>
+                </div>
                 <div class="max-w-3xl mx-auto bg-white p-10 rounded-3xl shadow-xl border-t-4 border-gme-red">
                     <form id="quote-form" class="space-y-6">
                         <div>
                             <label for="name" class="block text-gray-700 font-semibold mb-2">Nombre completo</label>
-                            <input type="text" id="name" name="name" class="w-full p-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-4 focus:ring-gme-red" required>
+                            <input type="text" id="name" name="name" class="form-input" required>
                         </div>
                         <div>
                             <label for="email" class="block text-gray-700 font-semibold mb-2">Correo electrónico</label>
-                            <input type="email" id="email" name="email" class="w-full p-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-4 focus:ring-gme-red" required>
+                            <input type="email" id="email" name="email" class="form-input" required>
                         </div>
                         <div>
                             <label for="phone" class="block text-gray-700 font-semibold mb-2">Número Celular</label>
-                            <input type="tel" id="phone" name="phone" class="w-full p-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-4 focus:ring-gme-red" required>
+                            <input type="tel" id="phone" name="phone" class="form-input" required>
                         </div>
                         <div>
                             <label for="service" class="block text-gray-700 font-semibold mb-2">Tipo de Servicio</label>
-                            <select id="service" name="service" class="w-full p-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-4 focus:ring-gme-red" required>
+                            <select id="service" name="service" class="form-input" required>
                                 <option value="">Selecciona un servicio... 👇</option>
                                 <option value="grúas industriales">Grúas Industriales</option>
                                 <option value="remolque y transporte de carga">Remolque y Transporte de Carga</option>
@@ -305,19 +315,19 @@
                             <h4 class="text-lg font-bold text-gray-700">Detalles del Proyecto</h4>
                             <div>
                                 <label for="project-description" class="block text-gray-700 font-semibold mb-2">Descripción del proyecto</label>
-                                <textarea id="project-description" name="project-description" rows="3" class="w-full p-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-4 focus:ring-gme-red" placeholder="Describe brevemente la naturaleza del proyecto" required></textarea>
+                                <textarea id="project-description" name="project-description" rows="3" class="form-input" placeholder="Describe brevemente la naturaleza del proyecto" required></textarea>
                             </div>
                             <div>
                                 <label for="location" class="block text-gray-700 font-semibold mb-2">Ubicación y lugar</label>
-                                <input type="text" id="location" name="location" class="w-full p-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-4 focus:ring-gme-red" placeholder="Ej: Calle 123, Colonia XYZ, Ciudad" required>
+                                <input type="text" id="location" name="location" class="form-input" placeholder="Ej: Calle 123, Colonia XYZ, Ciudad" required>
                             </div>
                             <div>
                                 <label for="dates" class="block text-gray-700 font-semibold mb-2">Fechas</label>
-                                <input type="text" id="dates" name="dates" class="w-full p-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-4 focus:ring-gme-red" placeholder="Ej: 15 de Octubre de 2024 o 'Flexible'" required>
+                                <input type="text" id="dates" name="dates" class="form-input" placeholder="Ej: 15 de Octubre de 2024 o 'Flexible'" required>
                             </div>
                             <div>
                                 <label for="more-details" class="block text-gray-700 font-semibold mb-2">Más detalles</label>
-                                <textarea id="more-details" name="more-details" rows="3" class="w-full p-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-4 focus:ring-gme-red" placeholder="Cualquier información adicional, como tipo de maquinaria, peso, etc."></textarea>
+                                <textarea id="more-details" name="more-details" rows="3" class="form-input" placeholder="Cualquier información adicional, como tipo de maquinaria, peso, etc."></textarea>
                             </div>
                         </div>
 
@@ -329,8 +339,8 @@
             </div>
         </section>
         
-        <!-- WhatsApp Contact Section (New) -->
-        <section class="py-24 bg-gme-red text-white text-center">
+        <!-- WhatsApp Contact Section -->
+        <section class="py-24 bg-gme-red text-white text-center animate-fade-in">
             <div class="container mx-auto px-6">
                 <h3 class="text-4xl md:text-5xl font-extrabold mb-8 drop-shadow-lg">
                     ¡Hablemos de tu proyecto! 🗣️
@@ -346,11 +356,14 @@
         </section>
 
         <!-- Maneuvers Yard Location Section -->
-        <section id="maneuvers-yard" class="py-24 bg-white">
+        <section id="maneuvers-yard" class="py-24 bg-white animate-fade-in">
             <div class="container mx-auto px-6">
-                <h3 class="text-4xl font-extrabold text-center mb-16 text-gme-blue section-header">
-                    Ubicación de Nuestro Patio de Maniobras 📍
-                </h3>
+                <div class="text-center mb-16">
+                    <h3 class="text-4xl font-extrabold text-gme-blue">
+                        Ubicación de Nuestro Patio de Maniobras 📍
+                    </h3>
+                    <div class="section-header-divider"></div>
+                </div>
                 <div class="max-w-4xl mx-auto shadow-2xl rounded-3xl overflow-hidden border-4 border-gme-red">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3729.079237000201!2d-101.336888!3d20.760416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zR01FIHwgUGF0aW8gZGUgTWFuaW9icmFz!5e0!3m2!1ses-419!2smx!4v1715873215286!5m2!1ses-419!2smx"
@@ -499,4 +512,3 @@
     </script>
 </body>
 </html>
-![Grupo GME (1)](https://github.com/user-attachments/assets/2b84ec2f-33b7-4a89-a3ce-a3a35857fef1)
