@@ -295,8 +295,9 @@
                 </div>
                 <div class="max-w-3xl mx-auto bg-white p-10 rounded-3xl shadow-xl border-t-4 border-brand-accent">
                     <form id="quote-form" class="space-y-6">
+                        <h4 class="text-2xl font-bold text-gray-700">Datos de contacto</h4>
                         <div>
-                            <label for="name" class="block text-gray-700 font-semibold mb-2">Datos de contacto</label>
+                            <label for="name" class="block text-gray-700 font-semibold mb-2">Nombre</label>
                             <input type="text" id="name" name="name" class="form-input" required>
                         </div>
                         <div>
