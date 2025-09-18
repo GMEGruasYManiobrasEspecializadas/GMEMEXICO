@@ -42,6 +42,14 @@
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0,0,0,0.25);
         }
+        
+        /* Estilo para el botón de WhatsApp con el color de la marca */
+        .bg-whatsapp-green {
+            background-color: #25D366;
+        }
+        .bg-whatsapp-green:hover {
+            background-color: #1DA851;
+        }
 
         /* Animación de entrada para secciones */
         @keyframes fadeIn {
@@ -121,6 +129,37 @@
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
         }
+
+        /* Animación para el menú de navegación */
+        .nav-item {
+            position: relative;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            left: 50%;
+            bottom: -5px;
+            transform: translateX(-50%);
+            background-color: #FF9800;
+            transition: width 0.3s ease-in-out;
+        }
+        .nav-item:hover::after {
+            width: 100%;
+        }
+
+        /* Estilo para el modal de mensaje mejorado */
+        #message-modal .modal-content {
+            animation: bounceIn 0.8s ease-out;
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -130,10 +169,10 @@
         <div class="container mx-auto px-6 py-8 flex flex-col sm:flex-row justify-between items-center">
             <h1 class="text-5xl font-extrabold mb-4 sm:mb-0 drop-shadow-lg">GME <span class="vivid-emoji">🏗️</span></h1>
             <nav class="space-x-4 sm:space-x-8 mt-4 sm:mt-0 text-lg font-medium">
-                <a href="#about" class="hover:text-brand-accent transition-colors duration-300">Sobre Nosotros</a>
-                <a href="#services" class="hover:text-brand-accent transition-colors duration-300">Servicios</a>
-                <a href="#brands" class="hover:text-brand-accent transition-colors duration-300">Marcas</a>
-                <a href="#quote" class="hover:text-brand-accent transition-colors duration-300">Cotización</a>
+                <a href="#about" class="nav-item hover:text-brand-accent transition-colors duration-300">Sobre Nosotros</a>
+                <a href="#services" class="nav-item hover:text-brand-accent transition-colors duration-300">Servicios</a>
+                <a href="#brands" class="nav-item hover:text-brand-accent transition-colors duration-300">Marcas</a>
+                <a href="#quote" class="nav-item hover:text-brand-accent transition-colors duration-300">Cotización</a>
             </nav>
         </div>
     </header>
@@ -360,7 +399,7 @@
                 <p class="text-xl md:text-2xl mb-10 font-medium">
                     Envíanos un mensaje por WhatsApp para una atención inmediata.
                 </p>
-                <a href="https://wa.me/524623699025" target="_blank" class="inline-flex items-center space-x-4 bg-white text-brand-dark-blue font-bold text-lg md:text-xl py-5 px-10 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-105">
+                <a href="https://wa.me/524623699025" target="_blank" class="inline-flex items-center space-x-4 bg-whatsapp-green text-white font-bold text-lg md:text-xl py-5 px-10 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-105">
                     <i class="fab fa-whatsapp text-4xl md:text-5xl"></i>
                     <span>Contactar por WhatsApp</span>
                 </a>
@@ -406,7 +445,7 @@
 
     <!-- Modal para mensajes -->
     <div id="message-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
-        <div class="bg-white rounded-xl p-8 shadow-2xl max-w-sm w-full text-center transform scale-95 transition-transform duration-300">
+        <div class="bg-white rounded-xl p-8 shadow-2xl max-w-sm w-full text-center transform scale-95 transition-transform duration-300 modal-content">
             <p id="modal-text" class="text-lg font-semibold text-gray-800 mb-4"></p>
             <button id="modal-close" class="bg-brand-accent text-white font-bold py-3 px-8 rounded-full hover:bg-orange-600 transition-colors duration-300 btn-primary">Cerrar</button>
         </div>
@@ -454,14 +493,15 @@
                 const modalText = document.getElementById('modal-text');
                 modalText.textContent = message;
                 messageModal.classList.remove('hidden');
-                messageModal.querySelector('div').classList.add('scale-100');
+                messageModal.querySelector('.modal-content').classList.add('scale-100');
             };
 
             // Cierra el modal de mensajes al hacer clic en el botón.
             document.getElementById('modal-close').addEventListener('click', () => {
                 const messageModal = document.getElementById('message-modal');
-                messageModal.querySelector('div').classList.remove('scale-100');
-                messageModal.querySelector('div').classList.add('scale-95');
+                const modalContent = messageModal.querySelector('.modal-content');
+                modalContent.classList.remove('scale-100');
+                modalContent.classList.add('scale-95');
                 setTimeout(() => {
                     messageModal.classList.add('hidden');
                 }, 300);
