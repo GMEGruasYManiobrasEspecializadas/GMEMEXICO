@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,21 +16,22 @@
             background: #f4f7f9;
             color: #1e293b;
         }
-        .bg-gme-blue { background-color: #1e293b; }
-        .bg-gme-red { background-color: #ef4444; }
-        .text-gme-red { color: #ef4444; }
-        .text-gme-blue { color: #1e293b; }
+        /* Nuevos colores: azul, naranja, amarillo, blanco */
+        .bg-brand-dark-blue { background-color: #0D47A1; }
+        .bg-brand-accent { background-color: #FF9800; }
+        .text-brand-accent { color: #FF9800; }
+        .text-brand-yellow { color: #FFC107; }
 
         /* Estilo de la tarjeta de servicio con sombra suave y transición */
         .service-card {
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease, border-color 0.4s ease;
-            border: 2px solid transparent;
+            border: 2px solid #e2e8f0; /* Borde inicial más visible */
             cursor: pointer;
         }
         .service-card:hover {
             transform: translateY(-12px) scale(1.03);
             box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-            border-color: #ef4444;
+            border-color: #FF9800;
         }
 
         /* Estilo de los botones */
@@ -54,14 +54,14 @@
         .service-icon {
             font-size: 4rem;
             margin-bottom: 1.5rem;
-            color: #ef4444;
+            color: #FFC107;
         }
 
         /* Estilo para los nuevos separadores de secciones */
         .section-header-divider {
             height: 6px;
             width: 100px;
-            background: linear-gradient(90deg, #ef4444, #f87171);
+            background: linear-gradient(90deg, #FF9800, #FFD54F);
             border-radius: 9999px;
             margin: 0 auto;
             position: relative;
@@ -79,13 +79,13 @@
         }
         .form-input:focus {
             outline: none;
-            border-color: #ef4444;
-            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.25);
+            border-color: #FF9800;
+            box-shadow: 0 0 0 4px rgba(255, 152, 0, 0.25);
         }
 
         /* Estilo para la nueva sección principal (hero) */
         .hero-section {
-            background: linear-gradient(135deg, #1e293b, #2c3d52);
+            background: linear-gradient(135deg, #0D47A1, #2196F3);
             position: relative;
             height: 500px;
             width: 100%;
@@ -110,19 +110,30 @@
             clip-path: ellipse(50% 50% at 50% 100%);
             z-index: 10;
         }
+
+        /* Estilo para emojis más vivos */
+        .vivid-emoji {
+            display: inline-block;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
+            animation: pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
 
     <!-- Header -->
-    <header class="bg-gme-blue text-white shadow-xl rounded-b-[40px] z-50 relative">
+    <header class="bg-brand-dark-blue text-white shadow-xl rounded-b-[40px] z-50 relative">
         <div class="container mx-auto px-6 py-8 flex flex-col sm:flex-row justify-between items-center">
-            <h1 class="text-5xl font-extrabold mb-4 sm:mb-0 drop-shadow-lg">GME 🏗️</h1>
+            <h1 class="text-5xl font-extrabold mb-4 sm:mb-0 drop-shadow-lg">GME <span class="vivid-emoji">🏗️</span></h1>
             <nav class="space-x-4 sm:space-x-8 mt-4 sm:mt-0 text-lg font-medium">
-                <a href="#about" class="hover:text-gme-red transition-colors duration-300">Sobre Nosotros</a>
-                <a href="#services" class="hover:text-gme-red transition-colors duration-300">Servicios</a>
-                <a href="#brands" class="hover:text-gme-red transition-colors duration-300">Marcas</a>
-                <a href="#quote" class="hover:text-gme-red transition-colors duration-300">Cotización</a>
+                <a href="#about" class="hover:text-brand-accent transition-colors duration-300">Sobre Nosotros</a>
+                <a href="#services" class="hover:text-brand-accent transition-colors duration-300">Servicios</a>
+                <a href="#brands" class="hover:text-brand-accent transition-colors duration-300">Marcas</a>
+                <a href="#quote" class="hover:text-brand-accent transition-colors duration-300">Cotización</a>
             </nav>
         </div>
     </header>
@@ -136,8 +147,8 @@
             <p class="text-xl md:text-2xl mb-10 font-medium max-w-2xl animate-fade-in">
                 Soluciones integrales para la industria, con la seguridad y la tecnología que tu proyecto merece.
             </p>
-            <a href="#quote" class="inline-block bg-gme-red text-white font-bold py-4 px-10 rounded-full shadow-lg hover:bg-red-600 transition-colors duration-300 btn-primary animate-fade-in">
-                ¡Cotiza tu proyecto! 📝
+            <a href="#quote" class="inline-block bg-brand-accent text-white font-bold py-4 px-10 rounded-full shadow-lg hover:bg-orange-600 transition-colors duration-300 btn-primary animate-fade-in">
+                ¡Cotiza tu proyecto! <span class="vivid-emoji">📝</span>
             </a>
         </section>
 
@@ -145,31 +156,31 @@
         <section id="about" class="py-24 bg-white rounded-t-[40px] -mt-10 relative z-20 shadow-inner animate-fade-in">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
-                    <h3 class="text-4xl font-extrabold text-gme-blue">
-                        Sobre Nosotros 🤝
+                    <h3 class="text-4xl font-extrabold text-brand-dark-blue">
+                        Sobre Nosotros <span class="vivid-emoji">🤝</span>
                     </h3>
                     <div class="section-header-divider"></div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-                    <div>
-                        <h4 class="text-2xl font-bold text-gme-blue mb-4">Misión 🎯</h4>
-                        <p class="text-gray-700 leading-relaxed text-lg">Como **Gigantes de Acero**, nuestra misión es resolver los desafíos logísticos y de elevación más complejos, brindando soluciones integrales con grúas y equipos industriales de vanguardia, respaldadas por una cobertura nacional y los más altos estándares de calidad. Lo logramos mediante la sinergia con empresas líderes a nivel mundial y el compromiso inquebrantable de nuestro equipo especializado, garantizando la seguridad y la satisfacción total de nuestros clientes en cada maniobra.</p>
+                    <div class="mb-8">
+                        <h4 class="text-2xl font-bold text-brand-dark-blue mb-4">Misión <span class="vivid-emoji">🎯</span></h4>
+                        <p class="text-gray-700 leading-relaxed text-lg mb-6">Como **Gigantes de Acero**, nuestra misión es resolver los desafíos logísticos y de elevación más complejos, brindando soluciones integrales con grúas y equipos industriales de vanguardia, respaldadas por una cobertura nacional y los más altos estándares de calidad. Lo logramos mediante la sinergia con empresas líderes a nivel mundial y el compromiso inquebrantable de nuestro equipo especializado, garantizando la seguridad y la satisfacción total de nuestros clientes en cada maniobra.</p>
                     </div>
-                    <div>
-                        <h4 class="text-2xl font-bold text-gme-blue mb-4">Visión 🚀</h4>
-                        <p class="text-gray-700 leading-relaxed text-lg">Ser la empresa líder y de referencia en México en soluciones integrales y logística de equipos industriales. Nos proyectamos como el socio estratégico indispensable para cualquier empresa o persona que requiera excelencia en el manejo de maquinaria, distinguiéndonos por una operación impecable fundamentada en la honestidad, la solidaridad y un compromiso inquebrantable con el cliente.</p>
+                    <div class="mb-8">
+                        <h4 class="text-2xl font-bold text-brand-dark-blue mb-4">Visión <span class="vivid-emoji">🚀</span></h4>
+                        <p class="text-gray-700 leading-relaxed text-lg mb-6">Ser la empresa líder y de referencia en México en soluciones integrales y logística de equipos industriales. Nos proyectamos como el socio estratégico indispensable para cualquier empresa o persona que requiera excelencia en el manejo de maquinaria, distinguiéndonos por una operación impecable fundamentada en la honestidad, la solidaridad y un compromiso inquebrantable con el cliente.</p>
                     </div>
                 </div>
                 <div class="mt-20 text-center">
-                    <h4 class="text-2xl font-bold text-gme-blue mb-6">Nuestros Valores ✨</h4>
+                    <h4 class="text-2xl font-bold text-brand-dark-blue mb-6">Nuestros Valores <span class="vivid-emoji">✨</span></h4>
                     <ul class="flex flex-wrap justify-center gap-4 text-center text-white font-medium">
-                        <li class="bg-gme-red rounded-full px-6 py-2 shadow-md hover:bg-red-500 transition-colors">Responsabilidad Social</li>
-                        <li class="bg-gme-red rounded-full px-6 py-2 shadow-md hover:bg-red-500 transition-colors">Conciencia Ambiental</li>
-                        <li class="bg-gme-red rounded-full px-6 py-2 shadow-md hover:bg-red-500 transition-colors">Servicio al Cliente</li>
-                        <li class="bg-gme-red rounded-full px-6 py-2 shadow-md hover:bg-red-500 transition-colors">Honestidad</li>
-                        <li class="bg-gme-red rounded-full px-6 py-2 shadow-md hover:bg-red-500 transition-colors">Sinceridad</li>
-                        <li class="bg-gme-red rounded-full px-6 py-2 shadow-md hover:bg-red-500 transition-colors">Transparencia</li>
-                        <li class="bg-gme-red rounded-full px-6 py-2 shadow-md hover:bg-red-500 transition-colors">Solidaridad</li>
+                        <li class="bg-brand-accent rounded-full px-6 py-2 shadow-md hover:bg-orange-500 transition-colors">Responsabilidad Social</li>
+                        <li class="bg-brand-accent rounded-full px-6 py-2 shadow-md hover:bg-orange-500 transition-colors">Conciencia Ambiental</li>
+                        <li class="bg-brand-accent rounded-full px-6 py-2 shadow-md hover:bg-orange-500 transition-colors">Servicio al Cliente</li>
+                        <li class="bg-brand-accent rounded-full px-6 py-2 shadow-md hover:bg-orange-500 transition-colors">Honestidad</li>
+                        <li class="bg-brand-accent rounded-full px-6 py-2 shadow-md hover:bg-orange-500 transition-colors">Sinceridad</li>
+                        <li class="bg-brand-accent rounded-full px-6 py-2 shadow-md hover:bg-orange-500 transition-colors">Transparencia</li>
+                        <li class="bg-brand-accent rounded-full px-6 py-2 shadow-md hover:bg-orange-500 transition-colors">Solidaridad</li>
                     </ul>
                 </div>
             </div>
@@ -179,10 +190,10 @@
         <section id="services" class="py-24 bg-gray-100 animate-fade-in">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
-                    <h3 class="text-4xl font-extrabold text-gme-blue">
-                        Nuestros Servicios 🛠️
+                    <h3 class="text-4xl font-extrabold text-brand-dark-blue">
+                        Nuestros Servicios <span class="vivid-emoji">🛠️</span>
                     </h3>
-                    <p class="text-xl font-medium text-gray-700 mt-4">Nuestra promesa es la **excelencia en cada maniobra**.</p>
+                    <p class="text-xl font-medium text-gray-700 mt-4 mb-12">Nuestra promesa es la **excelencia en cada maniobra**.</p>
                     <div class="section-header-divider"></div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
@@ -190,57 +201,57 @@
                     <!-- Servicio 1: Grúas Industriales -->
                     <div class="bg-white rounded-3xl shadow-lg p-10 service-card text-center" data-service="grúas industriales">
                         <i class="fas fa-truck-monster service-icon"></i>
-                        <h4 class="text-2xl font-bold text-gme-blue mb-2">Grúas Industriales</h4>
-                        <p class="text-gray-600">Contamos con grúas articuladas, telescópicas, tipo Titán y todo terreno. Ideales para cualquier desafío de elevación.</p>
+                        <h4 class="text-2xl font-bold text-brand-dark-blue mb-2">Grúas Industriales</h4>
+                        <p class="text-gray-600 mt-4">Contamos con grúas articuladas, telescópicas, tipo Titán y todo terreno. Ideales para cualquier desafío de elevación.</p>
                     </div>
 
                     <!-- Servicio 2: Remolque y Transporte -->
                     <div class="bg-white rounded-3xl shadow-lg p-10 service-card text-center" data-service="remolque y transporte de carga">
                         <i class="fas fa-trailer service-icon"></i>
-                        <h4 class="text-2xl font-bold text-gme-blue mb-2">Remolque y Transporte de Carga</h4>
-                        <p class="text-gray-600">Trailer con Plataforma, Remolque Cama Baja, Remolque LowBoy y Remolque para Carga Sobredimensionada.</p>
+                        <h4 class="text-2xl font-bold text-brand-dark-blue mb-2">Remolque y Transporte de Carga</h4>
+                        <p class="text-gray-600 mt-4">Trailer con Plataforma, Remolque Cama Baja, Remolque LowBoy y Remolque para Carga Sobredimensionada.</p>
                     </div>
 
                     <!-- Servicio 3: Montacargas -->
                     <div class="bg-white rounded-3xl shadow-lg p-10 service-card text-center" data-service="montacargas">
                         <i class="fas fa-pallet service-icon"></i>
-                        <h4 class="text-2xl font-bold text-gme-blue mb-2">Montacargas</h4>
-                        <p class="text-gray-600">Montacargas de Pasillo, de Combustión, Eléctricos y Todo-Terreno. Soluciones de movilidad para tus equipos.</p>
+                        <h4 class="text-2xl font-bold text-brand-dark-blue mb-2">Montacargas</h4>
+                        <p class="text-gray-600 mt-4">Montacargas de Pasillo, de Combustión, Eléctricos y Todo-Terreno. Soluciones de movilidad para tus equipos.</p>
                     </div>
 
                     <!-- Servicio 4: Plataformas -->
                     <div class="bg-white rounded-3xl shadow-lg p-10 service-card text-center" data-service="plataformas">
                         <i class="fas fa-toolbox service-icon"></i>
-                        <h4 class="text-2xl font-bold text-gme-blue mb-2">Plataformas</h4>
-                        <p class="text-gray-600">Plataformas articuladas, de tijera y telescópicas, tanto eléctricas como de combustión.</p>
+                        <h4 class="text-2xl font-bold text-brand-dark-blue mb-2">Plataformas</h4>
+                        <p class="text-gray-600 mt-4">Plataformas articuladas, de tijera y telescópicas, tanto eléctricas como de combustión.</p>
                     </div>
 
                     <!-- Servicio 5: Maniobras y Cargas Especiales -->
                     <div class="bg-white rounded-3xl shadow-lg p-10 service-card text-center" data-service="maniobras y cargas especiales">
                         <i class="fas fa-route service-icon"></i>
-                        <h4 class="text-2xl font-bold text-gme-blue mb-2">Maniobras y Cargas Especiales</h4>
-                        <p class="text-gray-600">Movimiento de maquinaria sobredimensionada, cargas sueltas y maniobras especializadas. Somos expertos en logística.</p>
+                        <h4 class="text-2xl font-bold text-brand-dark-blue mb-2">Maniobras y Cargas Especiales</h4>
+                        <p class="text-gray-600 mt-4">Movimiento de maquinaria sobredimensionada, cargas sueltas y maniobras especializadas. Somos expertos en logística.</p>
                     </div>
 
                     <!-- Servicio 6: Entarimado -->
                     <div class="bg-white rounded-3xl shadow-lg p-10 service-card text-center" data-service="entarimado">
                         <i class="fas fa-warehouse service-icon"></i>
-                        <h4 class="text-2xl font-bold text-gme-blue mb-2">Entarimado</h4>
-                        <p class="text-gray-600">Servicio especializado para el manejo seguro de mercancía y equipos sensibles.</p>
+                        <h4 class="text-2xl font-bold text-brand-dark-blue mb-2">Entarimado</h4>
+                        <p class="text-gray-600 mt-4">Servicio especializado para el manejo seguro de mercancía y equipos sensibles.</p>
                     </div>
                     
                     <!-- Servicio 7: Herrería -->
                     <div class="bg-white rounded-3xl shadow-lg p-10 service-card text-center" data-service="herreria">
                         <i class="fas fa-gavel service-icon"></i>
-                        <h4 class="text-2xl font-bold text-gme-blue mb-2">Herrería</h4>
-                        <p class="text-gray-600">Fabricación y montaje de estructuras metálicas, soldadura especializada y trabajos de metal en general.</p>
+                        <h4 class="text-2xl font-bold text-brand-dark-blue mb-2">Herrería</h4>
+                        <p class="text-gray-600 mt-4">Fabricación y montaje de estructuras metálicas, soldadura especializada y trabajos de metal en general.</p>
                     </div>
 
                     <!-- Servicio 8: Pailería -->
                     <div class="bg-white rounded-3xl shadow-lg p-10 service-card text-center" data-service="paileria">
                         <i class="fas fa-cogs service-icon"></i>
-                        <h4 class="text-2xl font-bold text-gme-blue mb-2">Pailería</h4>
-                        <p class="text-gray-600">Diseño, fabricación y reparación de tanques, silos, conductos, tolvas y otros recipientes industriales.</p>
+                        <h4 class="text-2xl font-bold text-brand-dark-blue mb-2">Pailería</h4>
+                        <p class="text-gray-600 mt-4">Diseño, fabricación y reparación de tanques, silos, conductos, tolvas y otros recipientes industriales.</p>
                     </div>
 
                 </div>
@@ -251,24 +262,24 @@
         <section id="brands" class="py-24 bg-white animate-fade-in">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
-                    <h3 class="text-4xl font-extrabold text-gme-blue">
-                        Nuestras Principales Marcas 🔧
+                    <h3 class="text-4xl font-extrabold text-brand-dark-blue">
+                        Nuestras Principales Marcas <span class="vivid-emoji">🔧</span>
                     </h3>
                     <div class="section-header-divider"></div>
                 </div>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 text-center items-center justify-center">
-                    <div class="bg-gray-100 rounded-xl p-4 shadow-inner text-lg font-semibold text-gray-800">Liebherr</div>
-                    <div class="bg-gray-100 rounded-xl p-4 shadow-inner text-lg font-semibold text-gray-800">Grove</div>
-                    <div class="bg-gray-100 rounded-xl p-4 shadow-inner text-lg font-semibold text-gray-800">Hiab</div>
-                    <div class="bg-gray-100 rounded-xl p-4 shadow-inner text-lg font-semibold text-gray-800">Hyster</div>
-                    <div class="bg-gray-100 rounded-xl p-4 shadow-inner text-lg font-semibold text-gray-800">Caterpillar</div>
-                    <div class="bg-gray-100 rounded-xl p-4 shadow-inner text-lg font-semibold text-gray-800">JLG</div>
-                    <div class="bg-gray-100 rounded-xl p-4 shadow-inner text-lg font-semibold text-gray-800">Genie</div>
-                    <div class="bg-gray-100 rounded-xl p-4 shadow-inner text-lg font-semibold text-gray-800">Hangcha</div>
-                    <div class="bg-gray-100 rounded-xl p-4 shadow-inner text-lg font-semibold text-gray-800">Yale</div>
-                    <div class="bg-gray-100 rounded-xl p-4 shadow-inner text-lg font-semibold text-gray-800">Mitsubishi</div>
-                    <div class="bg-gray-100 rounded-xl p-4 shadow-inner text-lg font-semibold text-gray-800">Nissan</div>
-                    <div class="bg-gray-100 rounded-xl p-4 shadow-inner text-lg font-semibold text-gray-800">National</div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 text-center items-center justify-center">
+                    <div class="bg-gray-100 rounded-xl p-4 shadow-inner text-lg font-semibold text-gray-800 border border-gray-300">Liebherr</div>
+                    <div class="bg-gray-100 rounded-xl p-4 shadow-inner text-lg font-semibold text-gray-800 border border-gray-300">Grove</div>
+                    <div class="bg-gray-100 rounded-xl p-4 shadow-inner text-lg font-semibold text-gray-800 border border-gray-300">Hiab</div>
+                    <div class="bg-gray-100 rounded-xl p-4 shadow-inner text-lg font-semibold text-gray-800 border border-gray-300">Hyster</div>
+                    <div class="bg-gray-100 rounded-xl p-4 shadow-inner text-lg font-semibold text-gray-800 border border-gray-300">Caterpillar</div>
+                    <div class="bg-gray-100 rounded-xl p-4 shadow-inner text-lg font-semibold text-gray-800 border border-gray-300">JLG</div>
+                    <div class="bg-gray-100 rounded-xl p-4 shadow-inner text-lg font-semibold text-gray-800 border border-gray-300">Genie</div>
+                    <div class="bg-gray-100 rounded-xl p-4 shadow-inner text-lg font-semibold text-gray-800 border border-gray-300">Hangcha</div>
+                    <div class="bg-gray-100 rounded-xl p-4 shadow-inner text-lg font-semibold text-gray-800 border border-gray-300">Yale</div>
+                    <div class="bg-gray-100 rounded-xl p-4 shadow-inner text-lg font-semibold text-gray-800 border border-gray-300">Mitsubishi</div>
+                    <div class="bg-gray-100 rounded-xl p-4 shadow-inner text-lg font-semibold text-gray-800 border border-gray-300">Nissan</div>
+                    <div class="bg-gray-100 rounded-xl p-4 shadow-inner text-lg font-semibold text-gray-800 border border-gray-300">National</div>
                 </div>
             </div>
         </section>
@@ -277,15 +288,15 @@
         <section id="quote" class="py-24 bg-gray-100 animate-fade-in">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
-                    <h3 class="text-4xl font-extrabold text-gme-blue">
-                        Cotiza tu Proyecto 📝
+                    <h3 class="text-4xl font-extrabold text-brand-dark-blue">
+                        Cotiza tu Proyecto <span class="vivid-emoji">📝</span>
                     </h3>
                     <div class="section-header-divider"></div>
                 </div>
-                <div class="max-w-3xl mx-auto bg-white p-10 rounded-3xl shadow-xl border-t-4 border-gme-red">
+                <div class="max-w-3xl mx-auto bg-white p-10 rounded-3xl shadow-xl border-t-4 border-brand-accent">
                     <form id="quote-form" class="space-y-6">
                         <div>
-                            <label for="name" class="block text-gray-700 font-semibold mb-2">Nombre completo</label>
+                            <label for="name" class="block text-gray-700 font-semibold mb-2">Datos de contacto</label>
                             <input type="text" id="name" name="name" class="form-input" required>
                         </div>
                         <div>
@@ -312,7 +323,7 @@
                         </div>
                         
                         <div class="space-y-4 pt-4 border-t-2 border-gray-200">
-                            <h4 class="text-lg font-bold text-gray-700">Detalles del Proyecto</h4>
+                            <h4 class="text-2xl font-bold text-gray-700 mb-4">Detalles del Proyecto</h4>
                             <div>
                                 <label for="project-description" class="block text-gray-700 font-semibold mb-2">Descripción del proyecto</label>
                                 <textarea id="project-description" name="project-description" rows="3" class="form-input" placeholder="Describe brevemente la naturaleza del proyecto" required></textarea>
@@ -331,8 +342,8 @@
                             </div>
                         </div>
 
-                        <button id="generate-button" type="submit" class="w-full bg-gme-red text-white font-bold py-5 px-6 rounded-full shadow-lg hover:bg-red-600 transition-colors duration-300 btn-primary text-xl">
-                            <span id="button-text">Enviar Cotización por Correo ✉️</span>
+                        <button id="generate-button" type="submit" class="w-full bg-brand-accent text-white font-bold py-5 px-6 rounded-full shadow-lg hover:bg-orange-600 transition-colors duration-300 btn-primary text-xl">
+                            <span id="button-text">Enviar Cotización por Correo <span class="vivid-emoji">✉️</span></span>
                         </button>
                     </form>
                 </div>
@@ -340,15 +351,15 @@
         </section>
         
         <!-- WhatsApp Contact Section -->
-        <section class="py-24 bg-gme-red text-white text-center animate-fade-in">
+        <section class="py-24 bg-brand-dark-blue text-white text-center animate-fade-in">
             <div class="container mx-auto px-6">
                 <h3 class="text-4xl md:text-5xl font-extrabold mb-8 drop-shadow-lg">
-                    ¡Hablemos de tu proyecto! 🗣️
+                    ¡Hablemos de tu proyecto! <span class="vivid-emoji">🗣️</span>
                 </h3>
                 <p class="text-xl md:text-2xl mb-10 font-medium">
                     Envíanos un mensaje por WhatsApp para una atención inmediata.
                 </p>
-                <a href="https://wa.me/524623699025" target="_blank" class="inline-flex items-center space-x-4 bg-green-500 hover:bg-green-600 text-white font-bold text-lg md:text-xl py-5 px-10 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-105">
+                <a href="https://wa.me/524623699025" target="_blank" class="inline-flex items-center space-x-4 bg-white text-brand-dark-blue font-bold text-lg md:text-xl py-5 px-10 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-105">
                     <i class="fab fa-whatsapp text-4xl md:text-5xl"></i>
                     <span>Contactar por WhatsApp</span>
                 </a>
@@ -359,12 +370,12 @@
         <section id="maneuvers-yard" class="py-24 bg-white animate-fade-in">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
-                    <h3 class="text-4xl font-extrabold text-gme-blue">
-                        Ubicación de Nuestro Patio de Maniobras 📍
+                    <h3 class="text-4xl font-extrabold text-brand-dark-blue">
+                        Ubicación de Nuestro Patio de Maniobras <span class="vivid-emoji">📍</span>
                     </h3>
                     <div class="section-header-divider"></div>
                 </div>
-                <div class="max-w-4xl mx-auto shadow-2xl rounded-3xl overflow-hidden border-4 border-gme-red">
+                <div class="max-w-4xl mx-auto shadow-2xl rounded-3xl overflow-hidden border-4 border-brand-accent">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3729.079237000201!2d-101.336888!3d20.760416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zR01FIHwgUGF0aW8gZGUgTWFuaW9icmFz!5e0!3m2!1ses-419!2smx!4v1715873215286!5m2!1ses-419!2smx"
                         width="100%"
@@ -381,14 +392,14 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gme-blue text-white py-12 mt-20 rounded-t-[40px] shadow-2xl">
+    <footer class="bg-brand-dark-blue text-white py-12 mt-20 rounded-t-[40px] shadow-2xl">
         <div class="container mx-auto px-6 text-center">
             <div class="mb-6">
                 <p class="font-bold text-xl">Contacto GME</p>
-                <p class="text-lg">Teléfono: <a href="tel:+524623699025" class="hover:text-gme-red transition-colors duration-300">(+52) 462-369-9025</a></p>
-                <p class="text-lg">Correo: <a href="mailto:ventas.gruasgme@gmail.com" class="hover:text-gme-red transition-colors duration-300">ventas.gruasgme@gmail.com</a></p>
+                <p class="text-lg">Teléfono: <a href="tel:+524623699025" class="hover:text-brand-accent transition-colors duration-300">(+52) 462-369-9025</a></p>
+                <p class="text-lg">Correo: <a href="mailto:ventas.gruasgme@gmail.com" class="hover:text-brand-accent transition-colors duration-300">ventas.gruasgme@gmail.com</a></p>
             </div>
-            <p>&copy; 2024 GME. Todos los derechos reservados. 👷‍♂️</p>
+            <p>&copy; 2024 GME. Todos los derechos reservados. <span class="vivid-emoji">👷‍♂️</span></p>
         </div>
     </footer>
 
@@ -396,7 +407,7 @@
     <div id="message-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
         <div class="bg-white rounded-xl p-8 shadow-2xl max-w-sm w-full text-center transform scale-95 transition-transform duration-300">
             <p id="modal-text" class="text-lg font-semibold text-gray-800 mb-4"></p>
-            <button id="modal-close" class="bg-gme-red text-white font-bold py-3 px-8 rounded-full hover:bg-red-600 transition-colors duration-300 btn-primary">Cerrar</button>
+            <button id="modal-close" class="bg-brand-accent text-white font-bold py-3 px-8 rounded-full hover:bg-orange-600 transition-colors duration-300 btn-primary">Cerrar</button>
         </div>
     </div>
 
