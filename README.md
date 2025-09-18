@@ -100,7 +100,7 @@
 
     <main class="flex-grow">
 
-        <!-- Hero Section -->
+        <!-- Hero Section - Sugerencia: Reemplazar el fondo con una imagen real de una grúa -->
         <section class="bg-cover bg-center bg-gray-700 bg-blend-multiply relative py-32 rounded-b-[40px] shadow-2xl" style="background-image: url('https://placehold.co/1200x600/1e293b/ef4444?text=GME+%7C+Tu+Socio+Log%C3%ADstico');">
             <div class="container mx-auto px-6 text-center text-white relative z-10">
                 <h2 class="text-4xl sm:text-6xl lg:text-8xl font-black leading-tight mb-6 animate-fade-in drop-shadow-xl">
@@ -257,34 +257,9 @@
                             <label for="details" class="block text-gray-700 font-semibold mb-2">Detalles del proyecto</label>
                             <textarea id="details" name="details" rows="5" class="w-full p-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-4 focus:ring-gme-red" placeholder="Describe tu proyecto, ubicación, fechas y cualquier detalle importante." required></textarea>
                         </div>
-                        <div id="loading-spinner" class="text-center hidden">
-                            <svg class="animate-spin h-12 w-12 text-gme-blue mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                            </svg>
-                            <p class="mt-3 text-gme-blue font-semibold">Generando borrador de cotización... ⏳</p>
-                        </div>
-
-                        <div id="output-container" class="bg-gray-50 p-8 rounded-2xl shadow-inner hidden">
-                            <h4 class="text-2xl font-bold text-gme-blue mb-4">Borrador de Cotización 📄</h4>
-                            <div id="quote-output" class="text-gray-800 leading-relaxed whitespace-pre-wrap p-6 bg-white rounded-lg border border-gray-200"></div>
-                            
-                            <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mt-6">
-                                <button id="copy-button" type="button" class="w-full sm:w-1/3 bg-gray-200 text-gme-blue font-bold py-4 px-6 rounded-full shadow-md hover:bg-gray-300 transition-colors duration-300">
-                                    Copiar Borrador 📋
-                                </button>
-                                <button id="email-button" type="button" class="w-full sm:w-1/3 bg-gme-red text-white font-bold py-4 px-6 rounded-full shadow-lg hover:bg-red-600 transition-colors duration-300">
-                                    Enviar por Correo ✉️
-                                </button>
-                                <button id="whatsapp-button" type="button" class="w-full sm:w-1/3 bg-green-500 text-white font-bold py-4 px-6 rounded-full shadow-lg hover:bg-green-600 transition-colors duration-300 flex items-center justify-center space-x-2">
-                                    <i class="fab fa-whatsapp text-2xl"></i>
-                                    <span class="hidden sm:inline">Enviar por WhatsApp</span>
-                                </button>
-                            </div>
-                        </div>
                         
                         <button id="generate-button" type="submit" class="w-full bg-gme-red text-white font-bold py-5 px-6 rounded-full shadow-lg hover:bg-red-600 transition-colors duration-300 btn-primary text-xl">
-                            <span id="button-text">Generar Borrador ✨</span>
+                            <span id="button-text">Enviar Cotización por Correo ✉️</span>
                         </button>
                     </form>
                 </div>
@@ -354,22 +329,6 @@
 
     <script type="module">
         // =========================================================================
-        // CONFIGURACIÓN E INICIALIZACIÓN DE FIREBASE
-        // =========================================================================
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, onSnapshot, query, where, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        // Global variables for Firebase
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : '';
-        const apiKey = "";
-        
-        let db, auth;
-        let userId;
-
-        // =========================================================================
         // SCRIPTS DE APLICACIÓN
         // =========================================================================
 
@@ -379,14 +338,6 @@
             // VARIABLES GLOBALES Y SELECTORES DE ELEMENTOS
             // =========================================================================
             const form = document.getElementById('quote-form');
-            const generateButton = document.getElementById('generate-button');
-            const copyButton = document.getElementById('copy-button');
-            const emailButton = document.getElementById('email-button');
-            const whatsappButton = document.getElementById('whatsapp-button');
-            const buttonText = document.getElementById('button-text');
-            const loadingSpinner = document.getElementById('loading-spinner');
-            const quoteOutput = document.getElementById('quote-output');
-            const outputContainer = document.getElementById('output-container');
             const serviceSelect = document.getElementById('service');
             const serviceCards = document.querySelectorAll('.service-card');
             
@@ -399,7 +350,7 @@
                 "maniobras y cargas especiales": "Maniobras y Cargas Especiales",
                 "entarimado": "Entarimado"
             };
-
+            
             // =========================================================================
             // FUNCIONES DE UTILIDAD PARA LA INTERFAZ DE USUARIO
             // =========================================================================
@@ -413,86 +364,19 @@
                 const modalText = document.getElementById('modal-text');
                 modalText.textContent = message;
                 messageModal.classList.remove('hidden');
-                // Aplica una animación de escala para una entrada más fluida
                 messageModal.querySelector('div').classList.add('scale-100');
-            };
-
-            /**
-             * Muestra una notificación temporal (toast) en la parte inferior de la pantalla.
-             * @param {string} message - El mensaje a mostrar en el toast.
-             */
-            const showToast = (message) => {
-                const toast = document.getElementById('toast');
-                toast.textContent = message;
-                toast.classList.add('show');
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 3000);
             };
 
             // Cierra el modal de mensajes al hacer clic en el botón.
             document.getElementById('modal-close').addEventListener('click', () => {
                 const messageModal = document.getElementById('message-modal');
-                // Aplica una animación de escala para una salida más fluida
                 messageModal.querySelector('div').classList.remove('scale-100');
                 messageModal.querySelector('div').classList.add('scale-95');
                 setTimeout(() => {
                     messageModal.classList.add('hidden');
                 }, 300);
             });
-
-            // =========================================================================
-            // LÓGICA DE NEGOCIO Y GENERACIÓN DE COTIZACIÓN CON LLM
-            // =========================================================================
             
-            /**
-             * Genera una cotización detallada usando la API de Gemini.
-             * @param {string} name - Nombre del cliente.
-             * @param {string} email - Correo del cliente.
-             * @param {string} service - Tipo de servicio.
-             * @param {string} details - Detalles del proyecto.
-             * @returns {Promise<string>} Promesa que resuelve con el texto de la cotización.
-             */
-            const generateLLMQuote = async (name, email, service, details) => {
-                const serviceName = servicesMap[service] || service;
-                const prompt = `Actúa como un agente de ventas de la empresa GME, especializada en grúas y maniobras en México. Tu objetivo es generar un borrador de cotización profesional y detallado basado en la siguiente información proporcionada por un cliente:\n\n- Nombre del cliente: ${name}\n- Correo electrónico: ${email}\n- - Servicio solicitado: ${serviceName}\n- Detalles del proyecto: ${details}\n\nEl borrador debe ser amigable pero profesional. Comienza con un saludo cordial. Confirma que has recibido la solicitud y resume el servicio y los detalles del proyecto. Luego, explica brevemente el siguiente paso: que un representante de ventas se pondrá en contacto pronto para una cotización final y una consultoría más profunda. El borrador debe terminar con un agradecimiento y la firma del "Equipo de GME". El borrador debe estar listo para ser enviado por correo electrónico. No incluyas información de precios. Escribe en español.`;
-                
-                const payload = {
-                    contents: [{ parts: [{ text: prompt }] }],
-                    tools: [{ "google_search": {} }],
-                    systemInstruction: {
-                        parts: [{ text: "Genera una cotización profesional para un cliente." }]
-                    },
-                };
-                
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-                
-                try {
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-
-                    const result = await response.json();
-                    const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
-                    
-                    if (!text) {
-                        throw new Error("Respuesta de la API vacía.");
-                    }
-
-                    return text;
-
-                } catch (error) {
-                    console.error("Error al generar la cotización con la API de Gemini:", error);
-                    return "Lo sentimos, no pudimos generar un borrador de cotización en este momento. Por favor, inténtalo de nuevo más tarde.";
-                }
-            };
-
             // =========================================================================
             // MANEJADORES DE EVENTOS
             // =========================================================================
@@ -502,13 +386,12 @@
                 card.addEventListener('click', () => {
                     const serviceType = card.dataset.service;
                     serviceSelect.value = serviceType;
-                    // Desplazamiento suave hacia la sección de cotización
                     document.getElementById('quote').scrollIntoView({ behavior: 'smooth' });
                 });
             });
             
             // Maneja el envío del formulario de cotización.
-            form.addEventListener('submit', async (e) => {
+            form.addEventListener('submit', (e) => {
                 e.preventDefault();
 
                 const formData = new FormData(form);
@@ -517,127 +400,30 @@
                 const service = formData.get('service');
                 const details = formData.get('details');
 
-                // Validar que Firebase esté inicializado y autenticado
-                if (!userId || !db) {
-                    showMessageModal("El servicio no está disponible. Por favor, recarga la página.");
-                    return;
-                }
-                
-                // Muestra el estado de "generando" en la interfaz
-                loadingSpinner.classList.remove('hidden');
-                buttonText.textContent = 'Generando...';
-                generateButton.disabled = true;
-                outputContainer.classList.add('hidden');
+                // Genera el asunto y cuerpo del correo
+                const serviceName = servicesMap[service] || service;
+                const subject = encodeURIComponent(`Solicitud de Cotización GME: ${serviceName}`);
+                const body = encodeURIComponent(
+                    `Hola, \n\nHe completado el formulario de cotización en su sitio web. Aquí están mis detalles:\n\n` +
+                    `Nombre: ${name}\n` +
+                    `Correo electrónico: ${email}\n` +
+                    `Servicio solicitado: ${serviceName}\n` +
+                    `Detalles del proyecto: ${details}\n\n` +
+                    `Espero su respuesta. \n\nSaludos,\n${name}`
+                );
 
-                try {
-                    // Genera el borrador de cotización con el LLM
-                    const generatedText = await generateLLMQuote(name, email, service, details);
-
-                    // Guarda la cotización en Firestore
-                    const docRef = await addDoc(collection(db, `artifacts/${appId}/public/data/quotes`), {
-                        userId: userId,
-                        name: name,
-                        email: email,
-                        service: service,
-                        details: details,
-                        generatedText: generatedText,
-                        timestamp: new Date()
-                    });
-                    
-                    console.log("Documento de cotización guardado con ID: ", docRef.id);
-                    quoteOutput.textContent = generatedText;
-                    outputContainer.classList.remove('hidden');
-                    showToast("¡Borrador de cotización generado y guardado! ✅");
-
-                } catch (error) {
-                    console.error("Error al generar o guardar la cotización:", error);
-                    showMessageModal("Ocurrió un error al generar y guardar tu cotización. Por favor, inténtalo de nuevo.");
-                } finally {
-                    // Restablece el estado del botón y del spinner
-                    loadingSpinner.classList.add('hidden');
-                    buttonText.textContent = 'Generar Borrador ✨';
-                    generateButton.disabled = false;
-                }
-            });
-
-            // Maneja la acción de copiar el borrador al portapapeles.
-            copyButton.addEventListener('click', () => {
-                const textToCopy = quoteOutput.textContent;
-                const textArea = document.createElement('textarea');
-                textArea.value = textToCopy;
-                document.body.appendChild(textArea);
-                textArea.select();
-                try {
-                    document.execCommand('copy');
-                    showToast('Borrador copiado al portapapeles. ¡Pega y envía! ✉️');
-                } catch (err) {
-                    console.error('No se pudo copiar el texto: ', err);
-                    showMessageModal('No se pudo copiar el texto. Por favor, inténtalo de nuevo manualmente.');
-                } finally {
-                    document.body.removeChild(textArea);
-                }
-            });
-
-            // Maneja la acción de abrir el cliente de correo para enviar la cotización.
-            emailButton.addEventListener('click', () => {
-                const quoteText = quoteOutput.textContent;
-                const subject = encodeURIComponent(`Cotización de Servicios GME - ${document.getElementById('name').value}`);
-                const body = encodeURIComponent(quoteText);
+                // Abre el cliente de correo con el enlace mailto
+                // NOTA IMPORTANTE PARA EL PROGRAMADOR:
+                // El método mailto es simple, pero no garantiza la captura del lead.
+                // Si el usuario cierra el cliente de correo sin enviar, el lead se pierde.
+                // Para una solución más robusta, se recomienda usar un servicio de formularios
+                // como Formspree o un script de backend para procesar el envío de forma silenciosa.
                 const mailtoLink = `mailto:ventas.gruasgme@gmail.com?subject=${subject}&body=${body}`;
                 window.location.href = mailtoLink;
-                showToast('Abriendo tu cliente de correo para enviar la cotización. ✅');
+                
+                // Muestra un modal de confirmación
+                showMessageModal("Tu solicitud ha sido enviada. Se abrirá tu cliente de correo para completar el proceso.");
             });
-            
-            // Maneja la acción de abrir WhatsApp para enviar la cotización.
-            whatsappButton.addEventListener('click', () => {
-                const quoteText = quoteOutput.textContent;
-                // El número de teléfono con código de país de México
-                const phoneNumber = "524623699025";
-                const message = encodeURIComponent(quoteText);
-                const whatsappLink = `https://wa.me/${phoneNumber}?text=${message}`;
-                window.open(whatsappLink, '_blank');
-                showToast('Abriendo WhatsApp para enviar la cotización. ✅');
-            });
-            
-            /**
-             * Inicializa Firebase y autentica al usuario.
-             */
-            const initializeFirebase = async () => {
-                if (!firebaseConfig || Object.keys(firebaseConfig).length === 0) {
-                    console.error("Firebase no está configurado. La funcionalidad de la base de datos no estará disponible.");
-                    return;
-                }
-
-                try {
-                    const app = initializeApp(firebaseConfig);
-                    db = getFirestore(app);
-                    auth = getAuth(app);
-
-                    if (initialAuthToken) {
-                        await signInWithCustomToken(auth, initialAuthToken);
-                    } else {
-                        await signInAnonymously(auth);
-                    }
-
-                    onAuthStateChanged(auth, (user) => {
-                        if (user) {
-                            userId = user.uid;
-                            console.log("Usuario autenticado. UID:", userId);
-                            showToast(`Bienvenido, tu ID de usuario es: ${userId.substring(0, 8)}...`);
-                        } else {
-                            userId = null;
-                            console.log("Usuario desautenticado.");
-                        }
-                    });
-
-                } catch (error) {
-                    console.error("Error al inicializar Firebase o autenticar:", error);
-                    showMessageModal("Ocurrió un error al conectar con el servidor. Por favor, inténtalo de nuevo.");
-                }
-            };
-            
-            // Inicia la conexión a Firebase cuando el DOM está listo
-            initializeFirebase();
         });
     </script>
 </body>
